@@ -300,10 +300,10 @@ export default function App() {
   };
 
   // Styles
-  var css = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:#333;border-radius:4px}@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.card{animation:fadeUp .3s ease-out both}";
+  var css = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@500;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:#333;border-radius:4px}@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.card{animation:fadeUp .3s ease-out both}@media(min-width:768px){.desk-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important}.desk-wide{max-width:900px!important}.desk-card{padding:20px!important}.desk-title{font-size:24px!important}.desk-sub{font-size:11px!important}.desk-met{padding:12px!important}.desk-metV{font-size:17px!important}.desk-fab{bottom:30px!important;right:30px!important;width:56px!important;height:56px!important;font-size:28px!important}.desk-modal{align-items:center!important}.desk-modalIn{border-radius:18px!important;max-width:520px!important;max-height:80vh!important}.desk-tabs{font-size:12px!important}.desk-text{font-size:14px!important}}";
 
   var s = {
-    app: { minHeight:"100vh", background:T.bg, fontFamily:"'Nunito',sans-serif", maxWidth:480, margin:"0 auto", color:T.t1 },
+    app: { minHeight:"100vh", background:T.bg, fontFamily:"'Nunito',sans-serif", maxWidth:900, margin:"0 auto", color:T.t1, padding:"0 env(safe-area-inset-right) 0 env(safe-area-inset-left)" },
     hdr: { background:"#1c1d25", padding:"14px 14px 8px", textAlign:"center", position:"sticky", top:0, zIndex:50, borderBottom:"2px solid " + A + "44" },
     title: { fontFamily:"'Baloo 2',cursive", fontSize:18, fontWeight:800, color:A, margin:0 },
     sub: { fontSize:9, color:T.t2, letterSpacing:2, textTransform:"uppercase" },
@@ -327,7 +327,7 @@ export default function App() {
     alert: { background:"#2a1a0a", border:"2px solid #ff8f0044", borderRadius:12, padding:10, fontSize:11, color:"#ffcc80", lineHeight:1.5, display:"flex", gap:6, alignItems:"flex-start" },
     fab: { position:"fixed", bottom:64, right:14, width:46, height:46, borderRadius:"50%", background:A, color:"#000", border:"none", fontSize:22, fontWeight:800, cursor:"pointer", boxShadow:"0 4px 18px "+A+"55", display:"flex", alignItems:"center", justifyContent:"center", zIndex:30 },
     modal: { position:"fixed", top:0, left:0, right:0, bottom:0, background:"rgba(0,0,0,0.6)", backdropFilter:"blur(6px)", zIndex:100, display:"flex", alignItems:"flex-end", justifyContent:"center" },
-    modalIn: { background:T.card, borderRadius:"18px 18px 0 0", width:"100%", maxWidth:480, maxHeight:"88vh", overflow:"auto", padding:16, border:"1px solid "+T.cb, borderBottom:"none" },
+    modalIn: { background:T.card, borderRadius:"18px 18px 0 0", width:"100%", maxWidth:520, maxHeight:"88vh", overflow:"auto", padding:16, border:"1px solid "+T.cb, borderBottom:"none" },
   };
 
   var icoList = ["🌿","🍯","🌸","💜","🍋","🔥","❄️","🌴","🍇","🌺"];
@@ -341,9 +341,9 @@ export default function App() {
         <div style={{ textAlign:"center" }}><span style={{ fontSize:18 }}>{W.emoji}</span> <span style={{ fontFamily:"'Baloo 2',cursive", fontSize:16, fontWeight:800, color:A }}>{W.title}</span></div>
         <p style={{ textAlign:"center", fontSize:10, color:T.t2, marginBottom:6 }}>{W.days} · {W.nut}</p>
 
-        <div style={s.card} className="card">
+        <div style={s.card} className="card desk-card">
           <div style={s.cT}>📊 Parâmetros</div>
-          <div style={s.g2}>
+          <div style={s.g2} className="desk-grid">
             <div style={s.met}><div style={s.mL}>🌡 Temp</div><div style={s.mV}>{W.temp}</div></div>
             <div style={s.met}><div style={s.mL}>💧 RH</div><div style={s.mV}>{W.rh}</div></div>
             <div style={s.met}><div style={s.mL}>☀️ Luz</div><div style={s.mV}>{W.light}</div></div>
@@ -634,11 +634,11 @@ export default function App() {
 
   /* ═══════════════════ RENDER ═══════════════════ */
   return (
-    <div style={s.app}>
+    <div style={s.app} className="desk-wide">
       <style>{css}</style>
       <div style={s.hdr}>
-        <h1 style={s.title}>🌱 Grow Tracker</h1>
-        <p style={s.sub}>Itaituba · PA · {W.label}</p>
+        <h1 style={s.title} className="desk-title">🌱 Grow Tracker</h1>
+        <p style={s.sub} className="desk-sub">Itaituba · PA · {W.label}</p>
         <div style={s.wkRow}>
           <button style={s.navB} onClick={function() { setWk(Math.max(0, wk - 1)); }}>‹</button>
           <div style={{ display:"flex", gap:2, overflow:"auto", padding:"2px 0" }}>
@@ -649,21 +649,21 @@ export default function App() {
       </div>
       <div style={s.prog}><div style={s.progF} /></div>
       <div style={s.tabs}>
-        <button onClick={function() { setTab("panel"); }} style={s.tabBtn(tab === "panel")}>📊 Painel</button>
-        <button onClick={function() { setTab("diary"); }} style={s.tabBtn(tab === "diary")}>📋 Diário</button>
-        <button onClick={function() { setTab("tools"); }} style={s.tabBtn(tab === "tools")}>🧰 Ferramentas</button>
+        <button onClick={function() { setTab("panel"); }} style={s.tabBtn(tab === "panel")} className="desk-tabs">📊 Painel</button>
+        <button onClick={function() { setTab("diary"); }} style={s.tabBtn(tab === "diary")} className="desk-tabs">📋 Diário</button>
+        <button onClick={function() { setTab("tools"); }} style={s.tabBtn(tab === "tools")} className="desk-tabs">🧰 Ferramentas</button>
       </div>
       <div style={{ paddingBottom: 72 }}>
         {tab === "panel" && renderPanel()}
         {tab === "diary" && renderDiary()}
         {tab === "tools" && renderTools()}
       </div>
-      <button style={s.fab} onClick={function() { setShowLog(true); }}>+</button>
+      <button style={s.fab} onClick={function() { setShowLog(true); }} className="desk-fab">+</button>
 
       {/* Log Modal */}
       {showLog && (
-        <div style={s.modal} onClick={function() { setShowLog(false); }}>
-          <div style={s.modalIn} onClick={function(e) { e.stopPropagation(); }}>
+        <div style={s.modal} onClick={function() { setShowLog(false); }} className="desk-modal">
+          <div style={s.modalIn} onClick={function(e) { e.stopPropagation(); }} className="desk-modalIn">
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
               <div style={s.cT}>📝 Novo Registro</div>
               <button onClick={function() { setShowLog(false); }} style={{ background:"none", border:"none", color:T.t3, fontSize:16, cursor:"pointer" }}>✕</button>
@@ -701,8 +701,8 @@ export default function App() {
 
       {/* New Cycle Modal */}
       {showNewCycle && (
-        <div style={s.modal} onClick={function() { setShowNewCycle(false); }}>
-          <div style={Object.assign({}, s.modalIn, { maxHeight:"45vh", borderRadius:18 })} onClick={function(e) { e.stopPropagation(); }}>
+        <div style={s.modal} onClick={function() { setShowNewCycle(false); }} className="desk-modal">
+          <div style={Object.assign({}, s.modalIn, { maxHeight:"45vh", borderRadius:18 })} onClick={function(e) { e.stopPropagation(); }} className="desk-modalIn">
             <div style={{ textAlign:"center", padding:"8px 0" }}>
               <div style={{ fontSize:36, marginBottom:6 }}>🔄</div>
               <div style={{ fontFamily:"'Baloo 2',cursive", fontSize:16, fontWeight:800, color:"#ffa726", marginBottom:6 }}>Novo Ciclo</div>
